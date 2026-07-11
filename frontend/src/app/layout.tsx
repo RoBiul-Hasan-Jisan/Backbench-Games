@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Backbench Games — Pick a Desk. Start a Match.",
   description:
     "The nostalgic multiplayer platform for the games you played on the last bench: Tic Tac Toe, Rock Paper Scissors, and more, online with friends.",
+  icons: {
+    icon: "/favicon.svg", // Path relative to the public folder
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

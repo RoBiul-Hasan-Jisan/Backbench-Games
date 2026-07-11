@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { Pencil, ArrowRight, Swords } from "lucide-react";
-import { GAMES } from "@/lib/games"; // adjust import path if needed
+import { GAMES } from "@/lib/games";
 
 export default function GamesPage() {
   return (
-    <main className="min-h-screen bg-notebook px-6 py-20">
+    <main className="min-h-screen bg-[url('/bg1.png')] bg-cover bg-center px-6 py-20">
       <div className="mx-auto max-w-5xl">
         <div className="mb-10 flex items-center gap-3">
           <Pencil size={20} className="text-wood" />

@@ -1,79 +1,225 @@
 @import "tailwindcss";
 
+/* ============================================================
+   DESIGN TOKENS – School Nostalgia, Crafted with Care
+   ============================================================ */
+
 @theme {
-  /* Backbench Games design tokens - school nostalgia, not generic dark-mode */
+  /* ---- Colors: Chalkboard & Paper ---- */
   --color-chalkboard: #24372f;
   --color-chalkboard-dark: #182620;
+  --color-chalkboard-light: #3a5a4c;
   --color-chalk: #f4f1e6;
+  --color-chalk-dust: #d4cfbf;
   --color-paper: #fbf6e9;
+  --color-paper-warm: #f5efe0;
   --color-paper-line: #d8cfb0;
+  --color-paper-line-faint: #e8e0cc;
+
+  /* ---- Wood & Writing ---- */
   --color-wood: #8b5e3c;
   --color-wood-dark: #6a4429;
+  --color-wood-light: #b5835a;
   --color-pencil: #e8b923;
+  --color-pencil-dark: #c99d1a;
   --color-redpen: #c0392b;
+  --color-redpen-dark: #a93226;
   --color-inkblue: #2f4a6b;
+  --color-inkblue-light: #4a6f94;
 
+  /* ---- Accents (playful) ---- */
+  --color-cricket-green: #3d7a5a;
+  --color-cricket-ball: #b33a2a;
+  --color-sticker-yellow: #f7d44a;
+
+  /* ---- Fonts ---- */
   --font-display: "Kalam", "Comic Sans MS", cursive;
   --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* ---- Spacing (optional) ---- */
+  --spacing-room: 1.25rem;
+  --spacing-desktop: 2.5rem;
+
+  /* ---- Border radius (paper clips ✨) ---- */
+  --radius-notebook: 12px;
+  --radius-chalk: 24px;
 }
+
+/* ============================================================
+   GLOBAL RESET / BASE
+   ============================================================ */
 
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background-color: var(--color-paper);
   color: var(--color-chalkboard-dark);
   font-family: var(--font-body);
+  transition: background-color 0.4s ease, color 0.3s ease;
 }
 
+/* ---- Dark Mode ---- */
 .dark body {
   background-color: var(--color-chalkboard);
   color: var(--color-chalk);
 }
 
-/* Chalkboard texture for the hero + dark surfaces */
+/* ---- Selection (like highlighter) ---- */
+::selection {
+  background-color: var(--color-pencil);
+  color: var(--color-chalkboard-dark);
+}
+
+.dark ::selection {
+  background-color: var(--color-inkblue-light);
+  color: var(--color-chalk);
+}
+
+/* ---- Focus (accessible, not ugly) ---- */
+:focus-visible {
+  outline: 3px solid var(--color-pencil);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.dark :focus-visible {
+  outline-color: var(--color-chalk);
+}
+
+/* ============================================================
+   UTILITY SURFACES
+   ============================================================ */
+
+/* ----- Chalkboard texture (hero + dark panels) ----- */
 .bg-chalkboard-texture {
   background-color: var(--color-chalkboard);
   background-image:
-    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.03) 0, transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.025) 0, transparent 45%);
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.04) 0%, transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.025) 0%, transparent 50%),
+    repeating-linear-gradient(45deg,
+      transparent,
+      transparent 60px,
+      rgba(255, 255, 255, 0.008) 60px,
+      rgba(255, 255, 255, 0.008) 61px
+    );
 }
 
-/* Faint ruled notebook lines for paper surfaces */
+/* ----- Notebook ruled paper ----- */
 .bg-notebook {
   background-color: var(--color-paper);
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent,
-    transparent 27px,
-    var(--color-paper-line) 28px
-  );
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 27px,
+      var(--color-paper-line) 28px
+    );
+  background-position: 0 0;
+  background-size: 100% 28px;
 }
+
+/* ----- Warm paper (slightly softer) ----- */
+.bg-notebook-warm {
+  background-color: var(--color-paper-warm);
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 27px,
+      var(--color-paper-line-faint) 28px
+    );
+  background-size: 100% 28px;
+}
+
+/* ----- Wood grain (subtle) ----- */
+.bg-wood-grain {
+  background: linear-gradient(160deg,
+      var(--color-wood) 0%,
+      var(--color-wood-dark) 40%,
+      var(--color-wood) 70%,
+      var(--color-wood-dark) 100%
+    );
+  background-size: 200% 200%;
+}
+
+/* ============================================================
+   TYPOGRAPHY – Chalk & Ink
+   ============================================================ */
 
 .chalk-text {
   font-family: var(--font-display);
-  text-shadow: 0 0 1px rgba(244, 241, 230, 0.5), 0 0 8px rgba(244, 241, 230, 0.15);
+  text-shadow:
+    0 0 2px rgba(244, 241, 230, 0.4),
+    0 0 12px rgba(244, 241, 230, 0.10);
+  letter-spacing: 0.01em;
 }
 
-/* Nameplate the room code sits in - the page's signature element */
+.ink-text {
+  font-family: var(--font-body);
+  color: var(--color-inkblue);
+}
+
+.dark .ink-text {
+  color: var(--color-chalk);
+}
+
+/* ----- Hand-drawn underline (pencil style) ----- */
+.underline-pencil {
+  text-decoration: none;
+  background-image: linear-gradient(to right, var(--color-pencil), var(--color-pencil-dark));
+  background-repeat: repeat-x;
+  background-position: bottom 2px left 0;
+  background-size: 100% 3px;
+  padding-bottom: 2px;
+}
+
+/* ============================================================
+   ROOM NAMEPLATE – Signature Element
+   ============================================================ */
+
 .room-nameplate {
   background: linear-gradient(180deg, var(--color-wood) 0%, var(--color-wood-dark) 100%);
   border: 3px solid var(--color-wood-dark);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: var(--radius-notebook);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.35),
+    0 4px 14px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
-/* --- Hand Cricket: rigged-hand joints + gameplay animations --- */
+.room-nameplate:hover {
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.35),
+    0 6px 20px rgba(0, 0, 0, 0.30),
+    0 0 0 1px rgba(255, 255, 255, 0.10) inset;
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   HAND CRICKET – Joints & Gestures
+   ============================================================ */
+
 .hc-joint {
   transform-origin: center bottom;
   transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .hc-hand-svg {
-  filter: drop-shadow(0 6px 10px rgba(24, 38, 32, 0.18));
+  filter: drop-shadow(0 8px 14px rgba(24, 38, 32, 0.18));
+  transition: filter 0.3s ease;
 }
 
+.hc-hand-svg:hover {
+  filter: drop-shadow(0 10px 20px rgba(24, 38, 32, 0.28));
+}
+
+/* ----- Hand animations ----- */
 .animate-hand-shake {
   animation: handShake 0.6s ease-in-out infinite;
 }
@@ -82,37 +228,317 @@ body {
   animation: handBreath 3s ease-in-out infinite;
 }
 
+.animate-hand-sway {
+  animation: handSway 2.8s ease-in-out infinite;
+}
+
+/* ----- Coin flip ----- */
 .animate-coin-flip {
   animation: coinFlip 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
+/* ----- Cricket ball bounce (bonus) ----- */
+.animate-ball-bounce {
+  animation: ballBounce 0.7s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+}
+
+/* ============================================================
+   KEYFRAMES
+   ============================================================ */
+
 @keyframes handShake {
-  0% { transform: translateY(0) rotate(0deg); }
-  15% { transform: translateY(-10px) rotate(-3deg); }
-  30% { transform: translateY(8px) rotate(3deg); }
-  45% { transform: translateY(-8px) rotate(-2deg); }
-  60% { transform: translateY(6px) rotate(2deg); }
-  75% { transform: translateY(-4px) rotate(-1deg); }
-  90% { transform: translateY(2px) rotate(0deg); }
+  0%   { transform: translateY(0) rotate(0deg); }
+  15%  { transform: translateY(-10px) rotate(-3.5deg); }
+  30%  { transform: translateY(8px) rotate(3.5deg); }
+  45%  { transform: translateY(-8px) rotate(-2.5deg); }
+  60%  { transform: translateY(6px) rotate(2.5deg); }
+  75%  { transform: translateY(-4px) rotate(-1.5deg); }
+  90%  { transform: translateY(2px) rotate(0.5deg); }
   100% { transform: translateY(0) rotate(0deg); }
 }
 
 @keyframes handBreath {
   0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-4px) scale(1.01); }
+  50%      { transform: translateY(-5px) scale(1.012); }
+}
+
+@keyframes handSway {
+  0%, 100% { transform: rotate(-2deg) translateX(0); }
+  50%      { transform: rotate(2deg) translateX(4px); }
 }
 
 @keyframes coinFlip {
-  0% { transform: rotateY(0) scale(1); }
-  30% { transform: rotateY(720deg) scale(1.4); }
-  60% { transform: rotateY(1440deg) scale(1.2); }
+  0%   { transform: rotateY(0) scale(1); }
+  30%  { transform: rotateY(720deg) scale(1.4); }
+  60%  { transform: rotateY(1440deg) scale(1.2); }
   100% { transform: rotateY(2160deg) scale(1); }
 }
 
+@keyframes ballBounce {
+  0%   { transform: translateY(0) scale(1); }
+  30%  { transform: translateY(-50px) scale(1.06); }
+  50%  { transform: translateY(0) scale(0.92); }
+  70%  { transform: translateY(-20px) scale(1.02); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* ============================================================
+   REDUCED MOTION – Accessibility First
+   ============================================================ */
+
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  .animate-hand-shake,
+  .animate-hand-breath,
+  .animate-hand-sway {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE TWEAKS
+   ============================================================ */
+
+@media (max-width: 640px) {
+  .room-nameplate {
+    border-radius: 8px;
+    border-width: 2px;
+  }
+
+  .bg-notebook,
+  .bg-notebook-warm {
+    background-size: 100% 24px;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 23px,
+      var(--color-paper-line) 24px
+    );
+  }
+
+  .bg-notebook-warm {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent,
+      transparent 23px,
+      var(--color-paper-line-faint) 24px
+    );
+  }
+
+  .chalk-text {
+    text-shadow:
+      0 0 1px rgba(244, 241, 230, 0.4),
+      0 0 6px rgba(244, 241, 230, 0.08);
+  }
+}
+
+/* ============================================================
+   PRINT STYLES – Make it look like a worksheet
+   ============================================================ */
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .bg-chalkboard-texture,
+  .bg-wood-grain {
+    background: white !important;
+  }
+
+  .room-nameplate {
+    border: 2px solid #333 !important;
+    box-shadow: none !important;
+    background: #eee !important;
+  }
+
+  .chalk-text {
+    text-shadow: none !important;
+    color: #222 !important;
+  }
+
+  .dark body {
+    background: white !important;
+    color: black !important;
+  }
+}
+
+/* ============================================================
+   MOTIVATION POSTER – Chalkboard Hero Quotes
+   ============================================================ */
+
+/* --- Main poster container --- */
+.motivation-poster {
+  background-color: var(--color-chalkboard);
+  background-image:
+    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.05) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(255,255,255,0.03) 0%, transparent 45%);
+  border: 6px solid var(--color-wood-dark);
+  border-radius: var(--radius-chalk);
+  box-shadow:
+    inset 0 0 30px rgba(0,0,0,0.6),
+    0 10px 30px rgba(0,0,0,0.4);
+  padding: 2rem 1.5rem;
+  font-family: var(--font-display);
+  color: var(--color-chalk);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- Faint ruled lines (like a notebook behind) --- */
+.motivation-poster::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 32px,
+    rgba(255,255,255,0.04) 33px
+  );
+  pointer-events: none;
+}
+
+/* --- Large headline (e.g. "THE WINNER'S MINDSET") --- */
+.motivation-headline {
+  font-size: clamp(2.2rem, 8vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 10px rgba(244, 241, 230, 0.25),
+    0 4px 0 var(--color-wood-dark);
+  margin-bottom: 0.25em;
+  line-height: 1.1;
+}
+
+/* --- Sub‑headline / tagline (e.g. "PLAY·LEARN·GROW") --- */
+.motivation-tagline {
+  font-size: clamp(1.1rem, 3vw, 1.8rem);
+  letter-spacing: 0.15em;
+  font-weight: 300;
+  color: var(--color-chalk-dust);
+  border-top: 2px solid rgba(244, 241, 230, 0.15);
+  border-bottom: 2px solid rgba(244, 241, 230, 0.15);
+  padding: 0.5rem 0;
+  margin: 1rem 0;
+  display: inline-block;
+}
+
+/* --- Grid of motivational snippets (like the poster) --- */
+.motivation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.8rem 1.2rem;
+  margin: 1.5rem 0 1rem;
+}
+
+.motivation-item {
+  font-size: clamp(0.9rem, 1.8vw, 1.3rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  background: rgba(255,255,255,0.04);
+  padding: 0.4rem 0.2rem;
+  border-radius: 6px;
+  transition: background 0.2s ease, transform 0.2s ease;
+  cursor: default;
+}
+
+.motivation-item:hover {
+  background: rgba(255,255,255,0.10);
+  transform: scale(1.02);
+}
+
+/* --- Special emphasis (e.g. "E=MC²") --- */
+.motivation-emphasis {
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--color-pencil);
+  text-shadow: 0 0 20px rgba(232, 185, 35, 0.25);
+  letter-spacing: 0.05em;
+  margin: 0.2rem 0;
+}
+
+/* --- Divider with dots (like the poster's "·" separators) --- */
+.motivation-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  color: var(--color-chalk-dust);
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  opacity: 0.6;
+}
+
+.motivation-divider span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--color-chalk-dust);
+  border-radius: 50%;
+}
+
+/* --- "Game On!" etc. (smaller callouts) --- */
+.motivation-callout {
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-redpen);
+  text-shadow: 0 0 12px rgba(192, 57, 43, 0.2);
+  display: inline-block;
+  margin: 0.3rem 0.6rem;
+  padding: 0.1rem 0.8rem;
+  border: 2px dashed var(--color-redpen);
+  border-radius: 30px;
+  background: rgba(192,57,43,0.05);
+}
+
+/* --- Optional chalk dust animation (subtle flicker) --- */
+@keyframes chalkFlicker {
+  0%, 100% { opacity: 0.95; }
+  50% { opacity: 1; }
+}
+
+.motivation-poster {
+  animation: chalkFlicker 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motivation-poster {
+    animation: none;
+  }
+}
+
+/* --- Dark mode is already handled via body background --- */
+.dark .motivation-poster {
+  border-color: var(--color-wood);
+  box-shadow:
+    inset 0 0 30px rgba(0,0,0,0.8),
+    0 10px 30px rgba(0,0,0,0.6);
+}
+
+/* --- Responsive tweaks --- */
+@media (max-width: 640px) {
+  .motivation-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+  .motivation-poster {
+    padding: 1.2rem;
+    border-width: 4px;
   }
 }
