@@ -20,7 +20,7 @@ const { HandCricketSocketHandler } = require("./games/handCricket/socketHandler"
 const PORT = process.env.PORT || 4000;
 
 // CLIENT_ORIGIN can be a single URL or a comma-separated list, e.g.
-//   CLIENT_ORIGIN=https://your-app.vercel.app,http://localhost:3000
+//  CLIENT_ORIGIN=https://your-app.vercel.app,http://localhost:3000
 // This lets the same backend serve your production frontend, Vercel preview
 // deployments, and local dev without redeploying every time.
 const ALLOWED_ORIGINS = (process.env.CLIENT_ORIGIN || "http://localhost:3000")

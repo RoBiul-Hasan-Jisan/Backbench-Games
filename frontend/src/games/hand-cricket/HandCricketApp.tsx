@@ -211,20 +211,20 @@ export function HandCricketApp() {
             )}
           </div>
         ) : (
-          <RoomView
-            room={room}
-            playerId={playerId}
-            socket={socket}
-            getServerTime={getServerTime}
-            onSetReady={(ready) => setReady(room.code, playerId, ready)}
-            onStartGame={() => startGame(room.code, playerId)}
-            onSubmitTossGuess={(prediction) => submitTossGuess(room.code, playerId, prediction)}
-            onSubmitTossDecision={(choice) => submitTossDecision(room.code, playerId, choice)}
-            onSubmitMove={(choice) => submitMove(room.code, playerId, choice)}
-            onStartSecondInnings={() => startSecondInnings(room.code, playerId)}
-            onPlayAgain={(accept) => submitRematch(room.code, playerId, accept)}
-            onLeaveRoom={handleExit}
-          />
+       <RoomView
+  room={room}
+  playerId={playerId}
+  socket={socket}
+  getServerTime={getServerTime}
+  onSetReady={(ready: boolean) => setReady(room.code, playerId, ready)}
+  onStartGame={() => startGame(room.code, playerId)}
+  onSubmitTossGuess={(prediction: "heads" | "tails") => submitTossGuess(room.code, playerId, prediction)}
+  onSubmitTossDecision={(choice: 'bat' | 'bowl') => submitTossDecision(room.code, playerId, choice)}
+  onSubmitMove={(choice: number) => submitMove(room.code, playerId, choice)}
+  onStartSecondInnings={() => startSecondInnings(room.code, playerId)}
+  onPlayAgain={(accept: boolean) => submitRematch(room.code, playerId, accept)}
+  onLeaveRoom={handleExit}
+/>
         )}
       </div>
     </main>

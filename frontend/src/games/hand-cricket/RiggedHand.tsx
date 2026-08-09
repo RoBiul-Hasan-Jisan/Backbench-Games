@@ -132,7 +132,7 @@ const Finger: React.FC<{
     pinky: { x: 1.6, z: 0.2 },
   };
   const offset = offsets[finger];
-  const baseRotation = isThumb ? [0, 0, -Math.PI / 6] : [0, 0, 0];
+  const baseRotation: [number, number, number] = isThumb ? [0, 0, -Math.PI / 6] : [0, 0, 0];
 
   return (
     <group position={[offset.x, 0, offset.z]} rotation={baseRotation}>
@@ -173,7 +173,8 @@ const RiggedHand3D: React.FC<RiggedHandProps> = ({
     // The hand is roughly 4 units tall and 3 wide.
     // We want the hand to occupy about 70% of the viewport height.
     const targetHeight = 4.2 * scale;
-    const distance = targetHeight / (2 * Math.tan((camera.fov * Math.PI) / 360));
+    const perspectiveCamera = camera as THREE.PerspectiveCamera;
+    const distance = targetHeight / (2 * Math.tan((perspectiveCamera.fov * Math.PI) / 360));
     camera.position.set(0, 1.2, 9);
     camera.lookAt(0, 0.5, 0);
     camera.updateProjectionMatrix();
