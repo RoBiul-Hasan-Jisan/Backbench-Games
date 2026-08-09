@@ -40,7 +40,7 @@ export default function HomePage() {
                 </div>
 
                 {/* ——— Corkboard (pinned notices, upper-left of wall) ——— */}
-                <div className="absolute left-[1%] top-[6%] hidden h-40 w-32 rotate-[-2deg] rounded-sm bg-[#8a6b4a] shadow-[0_10px_30px_rgba(0,0,0,0.5)] ring-4 ring-[#5a3f28] xl:block">
+                <div className="absolute left-[1%] top-[6%] hidden h-40 w-32 -rotate-2 rounded-sm bg-[#8a6b4a] shadow-[0_10px_30px_rgba(0,0,0,0.5)] ring-4 ring-[#5a3f28] xl:block">
                     <div
                         className="absolute inset-0 opacity-30"
                         style={{
@@ -78,18 +78,18 @@ export default function HomePage() {
 
                 {/* ——— Rolled world map (upper-right of wall) ——— */}
                 <div className="absolute right-[2%] top-[8%] hidden xl:block">
-                    <div className="h-32 w-6 rounded-t-sm bg-gradient-to-b from-[#c9b896] to-[#a89370] shadow-[0_8px_24px_rgba(0,0,0,0.4)]">
+                    <div className="h-32 w-6 rounded-t-sm bg-linear-to-b from-[#c9b896] to-[#a89370] shadow-[0_8px_24px_rgba(0,0,0,0.4)]">
                         <div className="absolute -left-1 top-0 h-2 w-8 rounded-full bg-[#8a7355]" />
                         <div className="absolute -left-1 bottom-0 h-2 w-8 rounded-full bg-[#8a7355]" />
                     </div>
                 </div>
 
                 {/* ——— Chalkboard (main board) ——— */}
-                <div className="absolute inset-[3%] rounded-lg border-[12px] border-[#3d2e1e] shadow-[0_20px_80px_rgba(0,0,0,0.8),inset_0_0_60px_rgba(0,0,0,0.6)] md:inset-[4%]">
+                <div className="absolute inset-[3%] rounded-lg border-12 border-[#3d2e1e] shadow-[0_20px_80px_rgba(0,0,0,0.8),inset_0_0_60px_rgba(0,0,0,0.6)] md:inset-[4%]">
                     {/* Inner board surface */}
                     <div className="relative h-full w-full overflow-hidden rounded-sm bg-[#1a2a1f]">
                         {/* Green/black chalkboard gradient */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-[#1e2f22] via-[#162218] to-[#0f1a12]" />
+                        <div className="absolute inset-0 bg-linear-to-br from-[#1e2f22] via-[#162218] to-[#0f1a12]" />
 
                         {/* Chalk dust texture overlay */}
                         <div
@@ -206,17 +206,17 @@ export default function HomePage() {
                         </div>
 
                         {/* ——— Paper airplane, mid-flight across the board ——— */}
-                        <div className="absolute right-[8%] top-[18%] hidden rotate-[18deg] text-white/15 md:block">
+                        <div className="absolute right-[8%] top-[18%] hidden rotate-18 text-white/15 md:block">
                             <svg width="46" height="46" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M2 12L22 2L14 22L11 14L2 12Z" fillOpacity="0.5" stroke="currentColor" strokeWidth="0.5" />
                                 <path d="M11 14L14 22L11 14Z" />
                             </svg>
                         </div>
-                        <div className="absolute right-[13%] top-[15%] hidden h-px w-10 rotate-[18deg] bg-white/10 md:block" />
+                        <div className="absolute right-[13%] top-[15%] hidden h-px w-10 rotate-18 bg-white/10 md:block" />
 
                         {/* ——— Chalk glow ——— */}
-                        <div className="absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-400/6 blur-[150px]" />
-                        <div className="absolute left-1/4 top-1/3 h-[300px] w-[300px] -translate-x-1/2 rounded-full bg-purple-400/4 blur-[120px]" />
+                        <div className="absolute left-1/2 top-1/2 h-100 w-100 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-400/6 blur-[150px]" />
+                        <div className="absolute left-1/4 top-1/3 h-75 w-75 -translate-x-1/2 rounded-full bg-purple-400/4 blur-[120px]" />
 
                     </div>
                 </div>
@@ -243,7 +243,7 @@ export default function HomePage() {
                     {/* Eraser on tray */}
                     <div className="absolute -top-5 right-[8%] h-4 w-10 rounded-sm bg-[#2a1f14] shadow-md ring-1 ring-white/10 md:h-5 md:w-14" />
                     {/* Wooden ruler, leaning on the tray */}
-                    <div className="absolute -top-4 left-[45%] hidden h-6 w-1 rotate-[70deg] bg-gradient-to-b from-[#c9a86a]/60 to-[#a8823f]/50 md:block">
+                    <div className="absolute -top-4 left-[45%] hidden h-6 w-1 rotate-70 bg-linear-to-b from-[#c9a86a]/60 to-[#a8823f]/50 md:block">
                         <div className="absolute inset-y-0 left-0 w-px bg-[#3d2e1e]/40" />
                     </div>
                     {/* Yellow pencil, resting on tray */}
@@ -262,7 +262,7 @@ export default function HomePage() {
                     <div className="absolute left-[65%] top-1/2 h-1 w-8 -translate-y-1/2 rounded-sm bg-[#5a3f28] shadow-inner md:w-12" />
                     {/* A little red apple, resting on the front desk edge */}
                     <div className="absolute -top-3 right-[6%] hidden md:block">
-                        <div className="relative h-4 w-4 rounded-full bg-gradient-to-br from-red-500/50 to-red-700/50 shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
+                        <div className="relative h-4 w-4 rounded-full bg-linear-to-br from-red-500/50 to-red-700/50 shadow-[0_4px_10px_rgba(0,0,0,0.5)]">
                             <div className="absolute -top-1.5 left-1/2 h-2 w-0.5 -translate-x-1/2 rotate-12 rounded-full bg-[#5a3f28]/70" />
                             <div className="absolute -top-1 left-[55%] h-1.5 w-1 rotate-45 rounded-full bg-green-600/40" />
                         </div>
@@ -299,7 +299,7 @@ export default function HomePage() {
                             <br />
                             <span className="relative inline-block">
                                 Start a Match.
-                                <span className="absolute -bottom-2 left-0 h-1 w-full rounded-full bg-gradient-to-r from-yellow-200/30 via-yellow-200/10 to-transparent" />
+                                <span className="absolute -bottom-2 left-0 h-1 w-full rounded-full bg-linear-to-r from-yellow-200/30 via-yellow-200/10 to-transparent" />
                             </span>
                         </h1>
 
@@ -330,7 +330,7 @@ export default function HomePage() {
 
                             <Link
                                 href="/games"
-                                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-500 px-7 py-3.5 font-semibold text-white shadow-[0_8px_30px_rgba(99,102,241,0.2)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_12px_40px_rgba(99,102,241,0.3)] active:scale-[0.97]"
+                                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-linear-to-r from-indigo-600 to-indigo-500 px-7 py-3.5 font-semibold text-white shadow-[0_8px_30px_rgba(99,102,241,0.2)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_12px_40px_rgba(99,102,241,0.3)] active:scale-[0.97]"
                             >
                                 <span className="relative z-10 flex items-center gap-2">
                                     Play Now
@@ -339,7 +339,7 @@ export default function HomePage() {
                                         className="transition-transform duration-300 group-hover:translate-x-1"
                                     />
                                 </span>
-                                <span className="absolute inset-0 -translate-y-full bg-gradient-to-t from-white/10 to-transparent transition-transform duration-500 group-hover:translate-y-0" />
+                                <span className="absolute inset-0 -translate-y-full bg-linear-to-t from-white/10 to-transparent transition-transform duration-500 group-hover:translate-y-0" />
                             </Link>
 
                             <Link
