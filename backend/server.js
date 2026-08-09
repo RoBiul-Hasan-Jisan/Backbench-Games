@@ -18,15 +18,44 @@ const { RoomManager: HandCricketRoomManager } = require("./games/handCricket/roo
 const { HandCricketSocketHandler } = require("./games/handCricket/socketHandler");
 
 const PORT = process.env.PORT || 4000;
-const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || "http://localhost:3000";
+
+// CLIENT_ORIGIN can be a single URL or a comma-separated list, e.g.
+//   CLIENT_ORIGIN=https://your-app.vercel.app,http://localhost:3000
+// This lets the same backend serve your production frontend, Vercel preview
+// deployments, and local dev without redeploying every time.
+const ALLOWED_ORIGINS = (process.env.CLIENT_ORIGIN || "http://localhost:3000")
+  .split(",")
+  .map((o) => o.trim())
+  .filter(Boolean);
+
+function isOriginAllowed(origin) {
+  if (!origin) return true; // non-browser clients / server-to-server / curl
+  return ALLOWED_ORIGINS.includes(origin);
+}
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (isOriginAllowed(origin)) return callback(null, true);
+    callback(new Error(`Origin ${origin} not allowed by CORS`));
+  },
+  credentials: true,
+};
 
 const app = express();
-app.use(cors({ origin: CLIENT_ORIGIN }));
+app.use(cors(corsOptions));
 app.get("/health", (_req, res) => res.json({ ok: true }));
+app.get("/", (_req, res) => res.json({ ok: true, service: "backbench-games-server" }));
 
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
-  cors: { origin: CLIENT_ORIGIN, methods: ["GET", "POST"] },
+  cors: {
+    origin: (origin, callback) => {
+      if (isOriginAllowed(origin)) return callback(null, true);
+      callback(new Error(`Origin ${origin} not allowed by CORS`));
+    },
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
 });
 
 // ---- helpers -----------------------------------------------------------
