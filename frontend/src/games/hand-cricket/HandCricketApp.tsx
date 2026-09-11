@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { AlertCircle, Bot, DoorOpen, Users } from "lucide-react";
 import { useRoomStore } from "@/store/useRoomStore";
 import { useHandCricketSocket, getOrCreatePlayerId } from "./useHandCricketSocket";
@@ -156,13 +157,16 @@ export function HandCricketApp() {
                   </div>
                 </button>
 
-                <div className="flex w-full items-center gap-3 rounded-lg border border-dashed border-paper-line bg-white/40 p-4 text-left opacity-60">
-                  <Bot className="text-chalkboard-dark/40" />
+                <Link
+                  href="/play/hand-cricket/practice"
+                  className="flex w-full items-center gap-3 rounded-lg border border-paper-line bg-white/70 p-4 text-left transition hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  <Bot className="text-inkblue" />
                   <div>
-                    <p className="font-semibold text-chalkboard-dark/60">Practice vs Computer</p>
-                    <p className="text-sm text-chalkboard-dark/40">Coming soon.</p>
+                    <p className="font-semibold text-chalkboard-dark">Practice vs Computer</p>
+                    <p className="text-sm text-chalkboard-dark/60">No opponent? Play the bot.</p>
                   </div>
-                </div>
+                </Link>
               </div>
             )}
 

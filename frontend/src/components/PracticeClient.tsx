@@ -5,10 +5,12 @@ import Link from "next/link";
 import TicTacToeBoard from "@/games/tic-tac-toe/TicTacToeBoard";
 import { checkWinner, pickAiMove, type Cell } from "@/games/tic-tac-toe/logic";
 import RPSGame from "@/games/rock-paper-scissors/RPSGame";
+import { HandCricketPractice } from "@/games/hand-cricket/HandCricketPractice";
 
 export default function PracticeClient({ gameId }: { gameId: string }) {
   if (gameId === "tic-tac-toe") return <TicTacToePractice />;
   if (gameId === "rock-paper-scissors") return <RPSPractice />;
+  if (gameId === "hand-cricket") return <HandCricketPractice />;
 
   return (
     <main className="bg-notebook flex min-h-screen items-center justify-center px-6 text-center">
